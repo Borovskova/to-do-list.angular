@@ -1,0 +1,35 @@
+.container {
+    padding: 50px;
+
+    .col {
+        padding: 50px;
+        background-color: rgba(224, 231, 238, 0.246);
+
+        button {
+            margin-top: 20px;
+        }
+    }
+}
+
+.danger {
+    color: red;
+    font-size: 12px;
+}
+table{
+    margin: 30px;
+}
+td,
+th,
+p,
+.wrap, h1 {
+    text-align: center;
+}
+
+.form-wrapper {
+    padding: 20px;
+
+    input {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
