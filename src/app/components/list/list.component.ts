@@ -23,17 +23,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let listFromLS: any = localStorage.getItem('list');
-    if (listFromLS) {
-      JSON.parse(listFromLS).forEach((task: any) => {
-        if (this.taskService.list) {
-          let sameTask = this.taskService.list.find((item: any) => item.id == task.id);
-          if (!sameTask) {
-            this.taskService.list.push(task)
-          }
-        }
-      })
-    }
+    this.taskService.getTasksFromLS()
   }
 
   public showForm() {
@@ -49,7 +39,6 @@ export class ListComponent implements OnInit {
   }
   public editTask(task: any) {
     this.router.navigate(['edit-list', task.id])
-    localStorage.setItem('id', task.id)
   }
 
   public addTaskForRemove(task: any) {

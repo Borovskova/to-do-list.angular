@@ -12,8 +12,8 @@ export class EditComponent implements OnInit {
   private routeSubscription: Subscription;
   private id: any;
   public task: any;
-  public descriptionOfTask: string;
-  public titleOfTask: string;
+  public descriptionOfTask: any;
+  public titleOfTask: any;
   public modalBodyText: any;
   private isRemove: boolean = false;
   private isCancelEdit: boolean = false;
@@ -21,12 +21,13 @@ export class EditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, public taskService: TasksDataService, private router: Router) {
     this.routeSubscription = route.params.subscribe(params => this.id = params['id']);
-    this.task = this.taskService.list.find((item: any) => item.id == this.id);
-    this.descriptionOfTask = this.task.descriptionOfTask;
-    this.titleOfTask = this.task.titleOfTask;
   }
 
   ngOnInit(): void {
+    this.taskService.getTasksFromLS()
+    this.task = this.taskService.list.find((item: any) => item.id == this.id);
+    this.descriptionOfTask = this.task.descriptionOfTask;
+    this.titleOfTask = this.task.titleOfTask;
   }
 
 
@@ -55,6 +56,7 @@ export class EditComponent implements OnInit {
   public saveChanges() {
     this.task.titleOfTask = this.titleOfTask;
     this.task.descriptionOfTask = this.descriptionOfTask;
+    localStorage.setItem('list', JSON.stringify(this.taskService.list));
     this.router.navigate(['list']);
   }
   public removeTask() {
